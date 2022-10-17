@@ -22,8 +22,7 @@ class MaterialType extends AbstractType
           )
           ))
 
-            ->add('quantity')
-        ;
+            ->add('quantity');
     }
 
     public function configureOptions(OptionsResolver $resolver): void

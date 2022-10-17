@@ -29,6 +29,8 @@ class MaterialController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            
             $materialRepository->save($material, true);
 
             return $this->redirectToRoute('app_material_index', [], Response::HTTP_SEE_OTHER);

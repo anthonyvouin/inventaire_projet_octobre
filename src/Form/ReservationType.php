@@ -18,7 +18,7 @@ class ReservationType extends AbstractType
           //  ->add('empruntDate')
             ->add('rendered')
             ->add('email')
-          //  ->add('isRendered')
+           ->add('isRendered')
             ->add('material', EntityType::class, [
                 'class' => Material::class
             ])
