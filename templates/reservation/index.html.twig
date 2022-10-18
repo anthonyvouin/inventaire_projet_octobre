@@ -1,41 +1,39 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Reservation index{% endblock %}
+{% block title %}Réservation{% endblock %}
 
 {% block body %}
-    <h1>Reservation index</h1>
+    <h1>Réservation</h1>
 
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>EmpruntDate</th>
-                <th>Rendered</th>
+                <th>Date d'emprunt</th>
+                <th>Date à rendre</th>
                 <th>Email</th>
-                <th>IsRendered</th>
-                <th>actions</th>
+                <th>Est-ce rendu </th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
         {% for reservation in reservations %}
             <tr>
-                <td>{{ reservation.id }}</td>
+                
                 <td>{{ reservation.empruntDate ? reservation.empruntDate|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ reservation.rendered ? reservation.rendered|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ reservation.email }}</td>
                 <td>{{ reservation.isRendered ? 'Yes' : 'No' }}</td>
                 <td>
-                    <a href="{{ path('app_reservation_show', {'id': reservation.id}) }}">show</a>
-                    <a href="{{ path('app_reservation_edit', {'id': reservation.id}) }}">edit</a>
+                    <a href="{{ path('app_reservation_edit', {'id': reservation.id}) }}">Editer</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="6">no records found</td>
+                <td colspan="6">Aucun enregistrement trouvé</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('app_reservation_new') }}">Create new</a>
+    <a href="{{ path('app_reservation_new') }}">Créer un nouveau</a>
 {% endblock %}
