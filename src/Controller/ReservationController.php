@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Reservation;
 use App\Form\ReservationType;
 use App\Repository\ReservationRepository;
+use PhpParser\Node\Stmt\ElseIf_;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -31,7 +32,11 @@ class ReservationController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $reservation->setEmpruntDate(new \DateTime());
             $reservation->setIsRendered(false);
+            $quantity = $reservation->getMaterial()->getQuantity() -1;
+            $reservation->getMaterial()->setQuantity($quantity) ;
             $reservationRepository->save($reservation, true);
+          
+
 
             return $this->redirectToRoute('app_reservation_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -42,6 +47,9 @@ class ReservationController extends AbstractController
         ]);
     }
 
+
+
+
     #[Route('/{id}', name: 'app_reservation_show', methods: ['GET'])]
     public function show(Reservation $reservation): Response
     {
@@ -50,15 +58,40 @@ class ReservationController extends AbstractController
         ]);
     }
 
+
+
+
+
     #[Route('/{id}/edit', name: 'app_reservation_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Reservation $reservation, ReservationRepository $reservationRepository): Response
     {
+
+        $lastreservation = $reservationRepository->find($reservation->getId());
+        $ancienbool = $lastreservation->isIsRendered();
+
+
         $form = $this->createForm(ReservationType::class, $reservation);
         $form->handleRequest($request);
 
+
+      
+        $quantity = $lastreservation->getMaterial()->getQuantity();
+
         if ($form->isSubmitted() && $form->isValid()) {
-            
-            
+
+
+            if($ancienbool != $reservation->isIsRendered())
+            {
+               if($reservation->isIsRendered() == true )
+               {
+                    $reservation->getMaterial()->setQuantity($quantity + 1);
+                } else {
+                    $reservation->getMaterial()->setQuantity($quantity - 1);
+               }
+            }
+       
+
+
             $reservationRepository->save($reservation, true);
 
             return $this->redirectToRoute('app_reservation_index', [], Response::HTTP_SEE_OTHER);
@@ -69,6 +102,10 @@ class ReservationController extends AbstractController
             'form' => $form,
         ]);
     }
+
+
+
+
 
     #[Route('/{id}', name: 'app_reservation_delete', methods: ['POST'])]
     public function delete(Request $request, Reservation $reservation, ReservationRepository $reservationRepository): Response
