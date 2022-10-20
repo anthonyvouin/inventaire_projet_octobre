@@ -9,11 +9,15 @@
 </style>
 
 <div class="example-wrapper">
+    <h1>Salut toi {{ controller_name }}! ✅</h1>
+
+    This friendly message is coming from:
+    <ul>
        <li class="nav-item active">
-            <a class="nav-link" href="{{ path('app_material_index') }}">Matériel de l'école</a>
+            <a class="nav-link" href="{{ path('app_material_index') }}">Matériel</a>
         </li>
         <li class="nav-item active">
-            <a class="nav-link" href="{{ path('app_reservation_index') }}">Les réservation des éléves</a>
+            <a class="nav-link" href="{{ path('app_reservation_index') }}">Réservation</a>
         </li>       
     </ul>
 </div>
