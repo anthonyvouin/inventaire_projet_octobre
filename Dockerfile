@@ -14,5 +14,8 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 
 RUN curl -1sLf 'https://dl.cloudsmith.io/public/symfony/stable/setup.deb.sh' | sudo -E bash
 RUN sudo apt install symfony-cli
+
+RUN ls -la
+
 RUN composer install
 # RUN mv /root/.symfony/bin/symfony /usr/local/bin/symfony
