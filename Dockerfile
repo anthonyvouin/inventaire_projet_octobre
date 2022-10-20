@@ -15,5 +15,3 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 RUN curl -1sLf 'https://dl.cloudsmith.io/public/symfony/stable/setup.deb.sh' | sudo -E bash
 RUN sudo apt install symfony-cli
 # RUN mv /root/.symfony/bin/symfony /usr/local/bin/symfony
-RUN git config --global user.email "avouin@normandiewebschool.fr" \ 
-    && git config --global user.name "anthonyvouin"    
