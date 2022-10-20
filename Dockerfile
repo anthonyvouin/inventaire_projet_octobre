@@ -19,3 +19,5 @@ RUN sudo apt install symfony-cli
 
 RUN composer install
 # RUN mv /root/.symfony/bin/symfony /usr/local/bin/symfony
+
+RUN chown www-data:www-data -R .
