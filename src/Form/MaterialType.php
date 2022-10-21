@@ -7,6 +7,8 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class MaterialType extends AbstractType
@@ -18,12 +20,25 @@ class MaterialType extends AbstractType
           array(
             'label' => 'Nom',
             'attr'=>array(            
-            'placeholder' => 'Saisir votre nom'
+            'placeholder' => 'Saisir votre nom',
+             'class' => 'form-control'
           )
           
           ))
 
-            ->add('quantity');
+            ->add(
+              'quantity',IntegerType::class,
+            array(
+                'label' => 'Quatité',
+                'attr' => array(
+                  'placeholder' => 'Saisir votrequantité',
+                  'class' => 'form-control'
+                )
+
+              ))
+
+
+            ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void
