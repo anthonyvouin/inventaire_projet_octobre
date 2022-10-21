@@ -9,13 +9,13 @@ RUN apt update \
     && docker-php-ext-install zip
 
 WORKDIR /var/www/html
-COPY . .
 
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 RUN curl -1sLf 'https://dl.cloudsmith.io/public/symfony/stable/setup.deb.sh' | sudo -E bash
 RUN sudo apt install symfony-cli
+COPY . .
 
 RUN composer install
 # RUN mv /root/.symfony/bin/symfony /usr/local/bin/symfony
