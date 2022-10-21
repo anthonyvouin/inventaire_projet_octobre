@@ -16,10 +16,11 @@ class MaterialType extends AbstractType
         $builder
             ->add('name',TextType::class,
           array(
-            'attr'=>array(
-           
+            'label' => 'Nom',
+            'attr'=>array(            
             'placeholder' => 'Saisir votre nom'
           )
+          
           ))
 
             ->add('quantity');

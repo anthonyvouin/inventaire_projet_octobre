@@ -9,7 +9,8 @@
         <thead>
             <tr>
                 <th>Nom</th>
-                <th>Quantité</th>               
+                <th>Quantité</th>    
+                <th>Actions</th>                    
             </tr>
         </thead>
         <tbody>
@@ -17,10 +18,10 @@
             <tr>
                 <td>{{ material.name }}</td>
                 <td>{{ material.quantity }}</td>
-                <td>
-                    <a href="{{ path('app_material_edit', {'id': material.id}) }}">Editer</a>
-                </td>
+                <td><a href="{{ path('app_material_edit', {'id': material.id}) }}">Editer</a></td>              
             </tr>
+           
+          
         {% else %}
             <tr>
                 <td colspan="4">Aucun enregistrement trouvé</td>
@@ -28,6 +29,6 @@
         {% endfor %}
         </tbody>
     </table>
-
+            
     <a href="{{ path('app_material_new') }}">Créer un nouveau</a>
 {% endblock %}
