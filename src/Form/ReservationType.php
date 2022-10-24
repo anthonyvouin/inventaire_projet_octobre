@@ -18,21 +18,15 @@ class ReservationType extends AbstractType
     {
         $builder
           //  ->add('empruntDate')
-            ->add('rendered',DateTimeType::class,
-          array(
-            'label' => 'Nom',
-            'attr'=>array(            
-            'placeholder' => 'Saisir votre nom'
-          )
-          
-          ))
+            ->add('rendered')
             ->add(
             'email',
                 TextType::class,
             array(
                 'label' => 'Email',
                 'attr' => array(
-                    'placeholder' => 'Votre email'
+                    'placeholder' => 'Votre email' ,
+                    'class' => 'form-control'
                 )
 
             ))
