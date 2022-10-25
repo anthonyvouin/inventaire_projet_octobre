@@ -31,7 +31,7 @@
                 <td>{{ eleve.rendered ? eleve.rendered|date('d-m-Y H:i:s') : ''}}</td>
                 <td>{{ eleve.email }}</td>
                 <td>{{ eleve.material.name }}</td>  
-                <td><button class="btn btn-primary">ici</button></td>                        
+                <td>{{ include('home/sendMail.html.twig') }}</td>                        
             </tr>
            
           

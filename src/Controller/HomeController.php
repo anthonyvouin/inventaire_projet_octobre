@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
+use App\Entity\Reservation;
 use App\Repository\ReservationRepository;
+use App\Service\MailService;
 use stdClass;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -23,4 +25,29 @@ class HomeController extends AbstractController
             'eleves' => $eleves
         ]);
     }
+
+
+    
+
+    #[Route('/emailRappel/{id}', name: 'app_emailrappel', methods: ["POST"])]
+
+
+    public function mail(MailService $mailService, Reservation $reservation)
+    {
+        $destinaire = $reservation->getEmail();
+        $messageSubject = "Mail de relance";
+        $messageBody = "
+        <h1>Mail de relance matériel</h1>
+        <p>Merci de rendre votre matériel dès que possible</p>
+        ";
+
+        $mailService->sendMail($destinaire, $messageSubject, $messageBody);
+
+        //    return new Response('yes' , Response::HTTP_OK);
+
+
+
+        return $this->redirectToRoute('app_home', [],Response::HTTP_SEE_OTHER);
+    }
+
 }
