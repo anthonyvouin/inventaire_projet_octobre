@@ -12,7 +12,33 @@
 <div class="example-wrapper">
 
     <h1>Bienvenue sur le nouveau site de gestion de matériels de l'école Normandie Web School à Rouen ! ✅</h1>
-     
+  
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Date debut</th>
+                <th>Date fin</th>    
+                <th>Email</th>   
+                <th>Matérial</th>       
+                <th>Mail</th>                 
+            </tr>
+        </thead>
+        <tbody>
+
+        {% for eleve in eleves %}
+            <tr>
+                <td>{{ eleve.empruntDate  ? eleve.empruntDate|date('d-m-Y H:i:s') : ''}}</td>
+                <td>{{ eleve.rendered ? eleve.rendered|date('d-m-Y H:i:s') : ''}}</td>
+                <td>{{ eleve.email }}</td>
+                <td>{{ eleve.material.name }}</td>  
+                <td><button class="btn btn-primary">ici</button></td>                        
+            </tr>
+           
+          
+                
+        {% endfor %}
+        </tbody>
+    </table>
 
 
 </div>
