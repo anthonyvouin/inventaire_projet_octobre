@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Reservation;
 use App\Form\ReservationType;
 use App\Repository\ReservationRepository;
+use App\Service\MailService;
 use PhpParser\Node\Stmt\ElseIf_;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -23,7 +24,7 @@ class ReservationController extends AbstractController
     }
 
     #[Route('/new', name: 'app_reservation_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, ReservationRepository $reservationRepository): Response
+    public function new(Request $request, ReservationRepository $reservationRepository, MailService $mailService): Response
     {
         $_SESSION['truc'] = 1;
         $reservation = new Reservation();
@@ -36,7 +37,16 @@ class ReservationController extends AbstractController
             $quantity = $reservation->getMaterial()->getQuantity() -1;
             $reservation->getMaterial()->setQuantity($quantity) ;
             $reservationRepository->save($reservation, true);
-          
+
+            $destinaire = $reservation->getEmail();
+            $messageSubject = "Mail de confirmation emprunt";
+            $messageBody = "
+            <h1>Mail de confirmation emprunt</h1>
+            <p>Mail de confirmation emprunt</p>
+            ";
+
+            $mailService->sendMail($destinaire, $messageSubject, $messageBody);
+
 
 
             return $this->redirectToRoute('app_reservation_index', [], Response::HTTP_SEE_OTHER);
