@@ -29,7 +29,7 @@ class MaterialType extends AbstractType
             ->add(
               'quantity',IntegerType::class,
             array(
-                'label' => 'Quatité',
+                'label' => 'Quantité',
                 'attr' => array(
                   'placeholder' => 'Saisir votrequantité',
                   'class' => 'form-control'
