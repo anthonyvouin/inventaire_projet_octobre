@@ -16,6 +16,7 @@ class MaterialController extends AbstractController
     #[Route('/', name: 'app_material_index', methods: ['GET'])]
     public function index(MaterialRepository $materialRepository): Response
     {
+       
         return $this->render('material/index.html.twig', [
             'materials' => $materialRepository->findAll(),
         ]);
@@ -24,6 +25,8 @@ class MaterialController extends AbstractController
     #[Route('/new', name: 'app_material_new', methods: ['GET', 'POST'])]
     public function new(Request $request, MaterialRepository $materialRepository): Response
     {
+        $_SESSION['truc'] = 1;
+        
         $material = new Material();
         $form = $this->createForm(MaterialType::class, $material);
         $form->handleRequest($request);
@@ -53,6 +56,7 @@ class MaterialController extends AbstractController
     #[Route('/{id}/edit', name: 'app_material_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Material $material, MaterialRepository $materialRepository): Response
     {
+        $_SESSION['truc'] = 1;
         $form = $this->createForm(MaterialType::class, $material);
         $form->handleRequest($request);
 
@@ -71,6 +75,7 @@ class MaterialController extends AbstractController
     #[Route('/{id}', name: 'app_material_delete', methods: ['POST'])]
     public function delete(Request $request, Material $material, MaterialRepository $materialRepository): Response
     {
+        $_SESSION['truc'] = 1;
         if ($this->isCsrfTokenValid('delete'.$material->getId(), $request->request->get('_token'))) {
             $materialRepository->remove($material, true);
         }
