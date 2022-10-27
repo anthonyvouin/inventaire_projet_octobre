@@ -18,9 +18,9 @@ class MaterialType extends AbstractType
         $builder
             ->add('name',TextType::class,
           array(
-            'label' => 'Nom',
+            'label' => 'Nom du matériel',
             'attr'=>array(            
-            'placeholder' => 'Saisir votre nom',
+            'placeholder' => 'Saisir le nom du matériel',
              'class' => 'form-control'
           )
           
@@ -31,7 +31,7 @@ class MaterialType extends AbstractType
             array(
                 'label' => 'Quantité',
                 'attr' => array(
-                  'placeholder' => 'Saisir votrequantité',
+                  'placeholder' => 'Saisir votre quantité',
                   'class' => 'form-control'
                 )
 
