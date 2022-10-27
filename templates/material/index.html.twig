@@ -18,7 +18,7 @@
             <tr>
                 <td>{{ material.name }}</td>
                 <td>{{ material.quantity }}</td>
-                <td><a href="{{ path('app_material_edit', {'id': material.id}) }}">Editer</a></td>              
+                <td><a class="btn btn-primary" href="{{ path('app_material_edit', {'id': material.id}) }}">Editer</a></td>              
             </tr>
            
           
@@ -30,5 +30,5 @@
         </tbody>
     </table>
             
-    <a href="{{ path('app_material_new') }}">Créer un nouveau</a>
+    <a  class="btn btn-secondary" =href="{{ path('app_material_new') }}">Créer un nouveau</a>
 {% endblock %}

@@ -24,7 +24,7 @@
                 <td>{{ reservation.email }}</td>
                 <td>{{ reservation.isRendered ? 'Yes' : 'No' }}</td>
                 <td>
-                    <a href="{{ path('app_reservation_edit', {'id': reservation.id}) }}">Editer</a>
+                    <a  class="btn btn-primary"href="{{ path('app_reservation_edit', {'id': reservation.id}) }}">Editer</a>
                 </td>
             </tr>
         {% else %}
@@ -35,5 +35,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_reservation_new') }}">Créer un nouveau</a>
+    <a class="btn btn-secondary" href="{{ path('app_reservation_new') }}">Créer un nouveau</a>
 {% endblock %}
