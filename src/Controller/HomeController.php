@@ -25,9 +25,9 @@ class HomeController extends AbstractController
             'eleves' => $eleves
         ]);
     }
+  
 
 
-    
 
     #[Route('/emailRappel/{id}', name: 'app_emailrappel', methods: ["POST"])]
 
