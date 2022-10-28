@@ -10,6 +10,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 
 class ReservationType extends AbstractType
@@ -18,22 +19,62 @@ class ReservationType extends AbstractType
     {
         $builder
           //  ->add('empruntDate')
-            ->add('rendered')
+            ->add(
+            'rendered',
+            DateTimeType::class,
+                array(
+                'widget' => 'single_text',
+                'label' => "Date à rendre",
+                'attr' => array(
+                    'class' => 'mb-3'   
+                   )
+                )
+            )        
+         
+            
             ->add(
             'email',
                 TextType::class,
-            array(
+                array(
                 'label' => 'Email',
                 'attr' => array(
                     'placeholder' => 'Votre email' ,
-                    'class' => 'form-control'
-                )
+                    'class' => 'form-control mb-3'
+                   )
 
-            ))
-           ->add('isRendered')
-            ->add('material')
+                )
+            )
+         
+
+            ->add(
+            'material',
+                EntityType::class,
+                array(
+                'class' => Material::class,
+                'label' => "Matériel",
+                'attr' => array(
+                    'class' => 'form-control mb-3'
+                    )
+                )
+            )
+  
+
+            ->add(
+                'isRendered',
+                CheckboxType::class,
+                array(
+                    'label' => "Rendu",
+                    'required' => false,
+                    'attr' => array(
+                        'class' => 'form-check-input mb-3'
+                    )
+                )
+            )
+
         ;
     }
+
+
 
     public function configureOptions(OptionsResolver $resolver): void
     {
