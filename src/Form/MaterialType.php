@@ -21,7 +21,7 @@ class MaterialType extends AbstractType
             'label' => 'Nom du matériel',
             'attr'=>array(            
             'placeholder' => 'Saisir le nom du matériel',
-             'class' => 'form-control'
+             'class' => 'form-control mb-3'
           )
           
           ))
@@ -32,7 +32,7 @@ class MaterialType extends AbstractType
                 'label' => 'Quantité',
                 'attr' => array(
                   'placeholder' => 'Saisir votre quantité',
-                  'class' => 'form-control'
+                  'class' => 'form-control mb-3'
                 )
 
               ))
