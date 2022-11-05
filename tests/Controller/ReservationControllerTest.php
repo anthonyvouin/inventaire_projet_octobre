@@ -14,14 +14,14 @@ class ReservationControllerTest extends WebTestCase
    
     private KernelBrowser $client;
     private ReservationRepository $repository;
-    private MaterialRepository $materialRepo;
+    //private MaterialRepository $materialRepo;
     private string $path = '/reservation/';
 
     protected function setUp(): void
     {
         $this->client = static::createClient();
         $this->repository = static::getContainer()->get('doctrine')->getRepository(Reservation::class);
-        $this->materialRepo = static::getContainer()->get('doctrine')->getRepository(Material::class);
+      //  $this->materialRepo = static::getContainer()->get('doctrine')->getRepository(Material::class);
 
 
         foreach ($this->repository->findAll() as $object) {
@@ -40,34 +40,34 @@ class ReservationControllerTest extends WebTestCase
 
     
 
-    public function testNew(): void
-    {
-        // create material for reservation
-        $fixture = new Material();
-        $fixture->setName('Title');
-        $fixture->setQuantity(800);
+    // public function testNew(): void
+    // {
+    //     // create material for reservation
+    //     $fixture = new Material();
+    //     $fixture->setName('Title');
+    //     $fixture->setQuantity(800);
 
-        $this->materialRepo->save($fixture, true);
+    //     $this->materialRepo->save($fixture, true);
 
-        $materiel = $this->materialRepo->findAll();
+    //     $materiel = $this->materialRepo->findAll();
 
-        $originalNumObjectsInRepository = count($this->repository->findAll());
+    //     $originalNumObjectsInRepository = count($this->repository->findAll());
          
-        $this->client->request('GET', sprintf('%snew', $this->path));
+    //     $this->client->request('GET', sprintf('%snew', $this->path));
 
-        self::assertResponseStatusCodeSame(200);
+    //     self::assertResponseStatusCodeSame(200);
 
-        $this->client->submitForm('Sauvegarder', [
+    //     $this->client->submitForm('Sauvegarder', [
 
-            'reservation[rendered]' => '2025-01-01 00:00:00',
-            'reservation[email]' => 'Testing@testing.fr',
-            'reservation[isRendered]' => False,
-            'reservation[material]' => $materiel[0]->getId(),
-        ]);
+    //         'reservation[rendered]' => '2025-01-01 00:00:00',
+    //         'reservation[email]' => 'Testing@testing.fr',
+    //         'reservation[isRendered]' => False,
+    //         'reservation[material]' => $materiel[0]->getId(),
+    //     ]);
 
 
-        self::assertSame($originalNumObjectsInRepository + 1, count($this->repository->findAll()));
-    }
+    //     self::assertSame($originalNumObjectsInRepository + 1, count($this->repository->findAll()));
+    // }
 
 
 
