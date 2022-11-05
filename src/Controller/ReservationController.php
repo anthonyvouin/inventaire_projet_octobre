@@ -15,6 +15,12 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/reservation')]
 class ReservationController extends AbstractController
 {
+
+    public function __construct()
+    {
+        $_SESSION['truc'] = 1;
+    }
+
     #[Route('/', name: 'app_reservation_index', methods: ['GET'])]
     public function index(ReservationRepository $reservationRepository): Response
     {
@@ -26,7 +32,6 @@ class ReservationController extends AbstractController
     #[Route('/new', name: 'app_reservation_new', methods: ['GET', 'POST'])]
     public function new(Request $request, ReservationRepository $reservationRepository, MailService $mailService): Response
     {
-        $_SESSION['truc'] = 1;
         $reservation = new Reservation();
         $form = $this->createForm(ReservationType::class, $reservation);
         $form->handleRequest($request);
@@ -76,7 +81,6 @@ class ReservationController extends AbstractController
     #[Route('/{id}/edit', name: 'app_reservation_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Reservation $reservation, ReservationRepository $reservationRepository): Response
     {
-        $_SESSION['truc'] = 1;
         $lastreservation = $reservationRepository->find($reservation->getId());
         $ancienbool = $lastreservation->isIsRendered();
 
@@ -121,7 +125,6 @@ class ReservationController extends AbstractController
     #[Route('/{id}', name: 'app_reservation_delete', methods: ['POST'])]
     public function delete(Request $request, Reservation $reservation, ReservationRepository $reservationRepository): Response
     {
-        $_SESSION['truc'] = 1;
         if ($this->isCsrfTokenValid('delete'.$reservation->getId(), $request->request->get('_token'))) {
             $reservationRepository->remove($reservation, true);
         }

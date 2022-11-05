@@ -8,6 +8,7 @@
     <table class="table">
         <thead>
             <tr>
+                <th>Matériel</th>
                 <th>Date d'emprunt</th>
                 <th>Date à rendre</th>
                 <th>Email</th>
@@ -18,7 +19,7 @@
         <tbody>
         {% for reservation in reservations %}
             <tr>
-                
+                <td>{{reservation.material.name}}</td>
                 <td>{{ reservation.empruntDate ? reservation.empruntDate|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ reservation.rendered ? reservation.rendered|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ reservation.email }}</td>

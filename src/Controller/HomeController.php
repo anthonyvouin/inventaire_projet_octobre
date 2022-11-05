@@ -12,10 +12,14 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class HomeController extends AbstractController
 {
+    public function __construct()
+    {
+        $_SESSION['truc'] = 1;
+
+    }
     #[Route('/', name: 'app_home')]
     public function index(ReservationRepository $reservationRepository): Response
     {
-        $_SESSION['truc'] = 1;
 
         $eleves   = $reservationRepository->findBy(array('isRendered' => false));
 
