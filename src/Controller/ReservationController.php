@@ -43,6 +43,7 @@ class ReservationController extends AbstractController
             $reservation->getMaterial()->setQuantity($quantity) ;
             $reservationRepository->save($reservation, true);
 
+            
             $destinaire = $reservation->getEmail();
             $messageSubject = "Mail de confirmation emprunt";
             $materiel = $reservation->getMaterial()->getName();
