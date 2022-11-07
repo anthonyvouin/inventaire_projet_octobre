@@ -45,10 +45,21 @@ class ReservationController extends AbstractController
 
             $destinaire = $reservation->getEmail();
             $messageSubject = "Mail de confirmation emprunt";
+            $materiel = $reservation->getMaterial()->getName();
+            $dateEmprunt = $reservation->getEmpruntDate()->format('d-m-Y H:i:s');
+            $dateRendu = $reservation->getRendered()->format('d-m-Y H:i:s');
             $messageBody = "
             <h1>Mail de confirmation emprunt</h1>
-            <p>Mail de confirmation emprunt</p>
-            ";
+             <p>
+             A la date a la quelle vous avez emprunté : $dateEmprunt  <br/>
+             Vous avez emprunté le matériel  : $materiel <br/>
+             La date à rendre :  $dateRendu    <br/>
+            </p>";
+            
+
+          
+
+
 
             $mailService->sendMail($destinaire, $messageSubject, $messageBody);
 
