@@ -90,6 +90,7 @@ class MaterialControllerTest extends WebTestCase
 
         // self::assertResponseRedirects('/material/');
 
+        // find all = tableau de tout les objets de la table material
         $fixture = $this->repository->findAll();
 
         self::assertSame('TitleTest', $fixture[0]->getName());

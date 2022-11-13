@@ -93,7 +93,9 @@ class ReservationController extends AbstractController
     #[Route('/{id}/edit', name: 'app_reservation_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Reservation $reservation, ReservationRepository $reservationRepository): Response
     {
+        //recuêpere ancienne reserve grace a id
         $lastreservation = $reservationRepository->find($reservation->getId());
+        // recupere lancien bool
         $ancienbool = $lastreservation->isIsRendered();
 
 
@@ -110,6 +112,7 @@ class ReservationController extends AbstractController
             // si is rendered est different de lancienne et la nouvelle reservation
             if($ancienbool != $reservation->isIsRendered())
             {
+                // si c'est dif on rentre ici 
                if($reservation->isIsRendered() == true )
                {
                     $reservation->getMaterial()->setQuantity($quantity + 1);
