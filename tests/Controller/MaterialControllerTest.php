@@ -21,10 +21,12 @@ class MaterialControllerTest extends WebTestCase
         $this->client = static::createClient();
         $this->repository = static::getContainer()->get('doctrine')->getRepository(Material::class);
 
+        //remettre le test a zero a chaque fois 
         foreach ($this->repository->findAll() as $object) {
             $this->repository->remove($object, true);
         }
     }
+
     public function testIndex(): void
     {
         $crawler = $this->client->request('GET', $this->path);
@@ -69,6 +71,8 @@ class MaterialControllerTest extends WebTestCase
     //     // Use assertions to check that the properties are properly displayed.
     // }
 
+
+    
     public function testEdit(): void
     {
         $fixture = new Material();
@@ -92,6 +96,8 @@ class MaterialControllerTest extends WebTestCase
         self::assertSame(878, $fixture[0]->getQuantity());
     }
   
+    
+
 
     public function testRemove(): void
     {

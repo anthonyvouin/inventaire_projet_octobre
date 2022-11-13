@@ -19,6 +19,7 @@ class MaterialController extends AbstractController
         $_SESSION['truc'] = 1;
     }
 
+
     #[Route('/', name: 'app_material_index', methods: ['GET'])]
     public function index(MaterialRepository $materialRepository): Response
     {
@@ -28,6 +29,7 @@ class MaterialController extends AbstractController
         ]);
     }
 
+
     #[Route('/new', name: 'app_material_new', methods: ['GET', 'POST'])]
     public function new(Request $request, MaterialRepository $materialRepository): Response
     {
@@ -35,7 +37,7 @@ class MaterialController extends AbstractController
         
         $material = new Material();
         $form = $this->createForm(MaterialType::class, $material);
-        $form->handleRequest($request);
+        $form->handleRequest($request); // recupere la requete si lors de lenvoi du forms
 
         if ($form->isSubmitted() && $form->isValid()) {
 
@@ -53,6 +55,8 @@ class MaterialController extends AbstractController
         ]);
     }
 
+
+
     #[Route('/{id}', name: 'app_material_show', methods: ['GET'])]
     public function show(Material $material): Response
     {
@@ -60,6 +64,9 @@ class MaterialController extends AbstractController
             'material' => $material,
         ]);
     }
+
+
+
 
     #[Route('/{id}/edit', name: 'app_material_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Material $material, MaterialRepository $materialRepository): Response
@@ -80,6 +87,9 @@ class MaterialController extends AbstractController
         ]);
     }
 
+
+
+    
     #[Route('/{id}', name: 'app_material_delete', methods: ['POST'])]
     public function delete(Request $request, Material $material, MaterialRepository $materialRepository): Response
     {

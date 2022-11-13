@@ -107,6 +107,7 @@ class ReservationController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
 
 
+            // si is rendered est different de lancienne et la nouvelle reservation
             if($ancienbool != $reservation->isIsRendered())
             {
                if($reservation->isIsRendered() == true )

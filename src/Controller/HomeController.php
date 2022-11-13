@@ -17,6 +17,8 @@ class HomeController extends AbstractController
         $_SESSION['truc'] = 1;
 
     }
+
+
     #[Route('/', name: 'app_home')]
     public function index(ReservationRepository $reservationRepository): Response
     {
@@ -50,7 +52,6 @@ class HomeController extends AbstractController
         A la date a la quelle vous avez emprunté : $dateEmprunt  <br/>
         Vous avez emprunté le matériel  : $materiel <br/>
         La date à rendre :  $dateRendu    <br/>
-
         </p>
         ";
 
