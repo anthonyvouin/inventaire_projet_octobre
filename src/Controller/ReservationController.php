@@ -40,6 +40,7 @@ class ReservationController extends AbstractController
             $reservation->setEmpruntDate(new \DateTime());
             $reservation->setIsRendered(false);
             $quantity = $reservation->getMaterial()->getQuantity() -1;
+            // on inscrit la new quantite
             $reservation->getMaterial()->setQuantity($quantity) ;
             $reservationRepository->save($reservation, true);
 
