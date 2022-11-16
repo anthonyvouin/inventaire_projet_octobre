@@ -37,6 +37,7 @@ services:
 
   php:
     container_name: php
+    working_dir: "/var/www/html"
     build:
       context: .
     ports:
