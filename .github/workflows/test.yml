@@ -8,7 +8,7 @@ jobs:
       - uses: actions/checkout@v3
       - run: docker compose up -d 
       - run: docker compose exec php php bin/console doctrine:database:create --env=test
-      - run: docker compose exec php php bin/console doctrine:schema:update --env=test --forc
+      - run: docker compose exec php php bin/console doctrine:schema:update --env=test --force
       - run: docker compose exec php composer install
       - run: docker compose exec php php bin/phpunit
      
