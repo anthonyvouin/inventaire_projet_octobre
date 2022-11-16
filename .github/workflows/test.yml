@@ -7,6 +7,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - run: docker compose up -d 
+      - run: docker compose exec php composer install
       - run: ls -lah vendor/symfony/phpunit-bridge/bin/
-      - run: docker compose exec php php bin/simple-phpunit
+      - run: docker compose exec php php bin/phpunit
      
