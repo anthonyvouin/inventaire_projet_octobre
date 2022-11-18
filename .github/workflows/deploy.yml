@@ -6,7 +6,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - run:
+      - run: |
         mkdir -p ~/.ssh
         ssh-keyscan ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
         chmod 644 ~/.ssh/known_hosts
