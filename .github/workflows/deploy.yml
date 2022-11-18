@@ -15,5 +15,5 @@ jobs:
         with:
           ssh-private-key: ${{ secrets.SSH_KEY }}
 
-      - run: ssh ${{ secrets.SSH_USER}}@${{ secrets.SSH_HOST }}"cd inventaire & git pull"
-      - run: ssh ${{ secrets.SSH_USER}}@${{ secrets.SSH_HOST }}"cd inventaire & docker compose up -d --build --force-recreate"
+      - run: ssh ${{ secrets.SSH_USER}}@${{ secrets.SSH_HOST }} "cd inventaire && git pull"
+      - run: ssh ${{ secrets.SSH_USER}}@${{ secrets.SSH_HOST }} "cd inventaire && docker compose up -d --build --force-recreate"
