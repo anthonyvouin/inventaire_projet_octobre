@@ -17,9 +17,8 @@
             <tr>
                 <th scope="col">Date debut</th>
                 <th scope="col">Date fin</th>    
-                <th scope="col">Email</th>   
+                <th scope="col">Eleve</th>   
                 <th scope="col">Matérial</th>       
-                <th scope="col">Mail</th>            
             </tr>
         </thead>
         <tbody>
@@ -28,9 +27,8 @@
             <tr>
                 <td>{{ eleve.empruntDate  ? eleve.empruntDate|date('d-m-Y H:i:s') : ''}}</td>
                 <td>{{ eleve.rendered ? eleve.rendered|date('d-m-Y H:i:s') : ''}}</td>
-                <td>{{ eleve.email }}</td>
+                <td>{{ eleve.studentId }}</td>
                 <td>{{ eleve.material.name }}</td>  
-                <td>{{ include('home/sendMail.html.twig') }}</td>                        
             </tr>
            
           

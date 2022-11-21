@@ -2,19 +2,23 @@
 
 namespace App\Controller;
 
+use stdClass;
 use App\Entity\Reservation;
-use App\Form\ReservationType;
-use App\Repository\ReservationRepository;
 use App\Service\MailService;
+use App\Form\ReservationType;
+use App\Service\CallApiService;
 use PhpParser\Node\Stmt\ElseIf_;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Repository\ReservationRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('/reservation')]
 class ReservationController extends AbstractController
 {
+
+    
 
     public function __construct()
     {
@@ -22,10 +26,35 @@ class ReservationController extends AbstractController
     }
 
     #[Route('/', name: 'app_reservation_index', methods: ['GET'])]
-    public function index(ReservationRepository $reservationRepository): Response
+    public function index(ReservationRepository $reservationRepository, CallApiService $callApiService): Response
     {
+        $reservations = $reservationRepository->findAll();
+        $students = $callApiService->getData();
+        $array = [];
+        // double forech pour compare le studient id de la revservation et de l'api
+         foreach($students as $student)
+         {
+           foreach($reservations as $reservation){
+                if($student ['id'] == $reservation->getStudentId()){
+                    $item = new stdClass();
+                    $item->id = $reservation->getId();
+                    $item->material = $reservation->getMaterial();
+                    $item->empruntDate = $reservation->getEmpruntDate();
+                    $item->isRendered =$reservation->isIsRendered();
+                    $item->rendered = $reservation->getRendered();
+                    $item->studentId = $student['mail'];
+
+                    array_push($array, $item);
+
+                }
+           }
+        }
+
+       
+
         return $this->render('reservation/index.html.twig', [
-            'reservations' => $reservationRepository->findAll(),
+            'reservations' => $array,
+            
         ]);
     }
 
@@ -45,25 +74,25 @@ class ReservationController extends AbstractController
             $reservationRepository->save($reservation, true);
 
             
-            $destinaire = $reservation->getEmail();
-            $messageSubject = "Mail de confirmation emprunt";
-            $materiel = $reservation->getMaterial()->getName();
-            $dateEmprunt = $reservation->getEmpruntDate()->format('d-m-Y H:i:s');
-            $dateRendu = $reservation->getRendered()->format('d-m-Y H:i:s');
-            $messageBody = "
-            <h1>Mail de confirmation emprunt</h1>
-             <p>
-             A la date a la quelle vous avez emprunté : $dateEmprunt  <br/>
-             Vous avez emprunté le matériel  : $materiel <br/>
-             La date à rendre :  $dateRendu    <br/>
-            </p>";
+            // $destinaire = $reservation->getEmail();
+            // $messageSubject = "Mail de confirmation emprunt";
+            // $materiel = $reservation->getMaterial()->getName();
+            // $dateEmprunt = $reservation->getEmpruntDate()->format('d-m-Y H:i:s');
+            // $dateRendu = $reservation->getRendered()->format('d-m-Y H:i:s');
+            // $messageBody = "
+            // <h1>Mail de confirmation emprunt</h1>
+            //  <p>
+            //  A la date a la quelle vous avez emprunté : $dateEmprunt  <br/>
+            //  Vous avez emprunté le matériel  : $materiel <br/>
+            //  La date à rendre :  $dateRendu    <br/>
+            // </p>";
             
 
           
 
 
 
-            $mailService->sendMail($destinaire, $messageSubject, $messageBody);
+            // $mailService->sendMail($destinaire, $messageSubject, $messageBody);
 
 
 

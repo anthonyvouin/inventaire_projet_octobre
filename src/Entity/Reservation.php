@@ -24,11 +24,13 @@ class Reservation
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $rendered = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $email = null;
+ 
 
     #[ORM\Column]
     private ?bool $isRendered = null;
+
+    #[ORM\Column]
+    private ?int $studentId = null;
 
     public function getId(): ?int
     {
@@ -71,17 +73,7 @@ class Reservation
         return $this;
     }
 
-    public function getEmail(): ?string
-    {
-        return $this->email;
-    }
-
-    public function setEmail(string $email): self
-    {
-        $this->email = $email;
-
-        return $this;
-    }
+    
 
     public function isIsRendered(): ?bool
     {
@@ -91,6 +83,18 @@ class Reservation
     public function setIsRendered(bool $isRendered): self
     {
         $this->isRendered = $isRendered;
+
+        return $this;
+    }
+
+    public function getStudentId(): ?int
+    {
+        return $this->studentId;
+    }
+
+    public function setStudentId(int $studentId): self
+    {
+        $this->studentId = $studentId;
 
         return $this;
     }

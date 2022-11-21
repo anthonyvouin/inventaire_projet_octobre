@@ -4,19 +4,43 @@ namespace App\Form;
 
 use App\Entity\Material;
 use App\Entity\Reservation;
+use App\Service\CallApiService;
 use Doctrine\ORM\Mapping\Entity;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 
 class ReservationType extends AbstractType
 {
+
+    private $apiCallService;
+
+    public function  __construct(CallApiService $apiCallService)
+    {
+        $this->apiCallService = $apiCallService;
+    }
+
+         
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
+        $result = $this->apiCallService->getdata();
+        $array = [];
+
+        foreach($result as $eleve){
+
+            $email = $eleve['mail'];
+            $id = $eleve['id'];
+
+             $array[$email] = $id;
+
+        }
+
+
         $builder
           //  ->add('empruntDate')
             ->add(
@@ -33,15 +57,15 @@ class ReservationType extends AbstractType
          
             
             ->add(
-            'email',
-                TextType::class,
+            'studentId',
+                ChoiceType::class,
                 array(
-                'label' => 'Email',
+                'label' => 'Eleve',                
+                'choices'  => $array,
                 'attr' => array(
-                    'placeholder' => 'Votre email' ,
                     'class' => 'form-control mb-3'
-                   )
-
+                )             
+                
                 )
             )
          

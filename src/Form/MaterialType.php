@@ -34,10 +34,7 @@ class MaterialType extends AbstractType
                   'placeholder' => 'Saisir votre quantité',
                   'class' => 'form-control mb-3'
                 )
-
               ))
-
-
             ;
     }
 
